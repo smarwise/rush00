@@ -9,7 +9,7 @@ Hero::Hero(std::string name) : Name(name){
 }
 
 Hero::~Hero() {
-    std::cout << "Player Destroyed\n";
+    // std::cout << "Player Destroyed\n";
 }
 
 Hero::Hero(const Hero &newft) {

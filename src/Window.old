@@ -1,0 +1,119 @@
+#include "../classes/window.hpp"
+
+Window::Window()
+{
+}
+
+Window::Window(const Window &newft)
+{
+    *this = newft;
+}
+
+WINDOW *Window::makeWin()
+{
+    initscr();
+    this->win = newwin(50, 50, 10, 10);
+    wgetch(this->win);
+    box(this->win, 10, 10);
+    curs_set(0);
+    box(this->win, 0, 0);
+    // scrollokthis->win, TRUE);
+    wrefresh(this->win);
+    return (win);
+}
+
+void Window::moveto(int y, int x)
+{
+    initscr();
+    wgetch(this->win);
+    box(this->win, 10, 10);
+    char a = 'X';
+    wclear(this->win);
+    mvwaddch(this->win, y, x, a);
+    mvwaddch(this->win, y + 1, x, a);
+    mvwaddch(this->win, y, x + 1, a);
+    mvwaddch(this->win, y + 1, x + 1, a);
+    wrefresh(this->win);
+}
+
+void Window::useWin()
+{
+
+    initscr();
+    wgetch(this->win);
+    box(this->win, 10, 10);
+    wrefresh(this->win);
+    noecho();
+    keypad(this->win, TRUE);
+    int c, y, x;
+    x = 0;
+    y = 0; 
+    moveto(y, x);
+    while ((c = wgetch(this->win)) != 27)
+    {
+        switch (c)
+        {
+            case KEY_UP:
+                y--;
+                moveto(y, x);
+                break;
+            case KEY_DOWN:
+                y++;
+                moveto(y, x);
+                break;
+            case KEY_LEFT:
+                x--;
+                moveto(y, x);
+                break;
+            case KEY_RIGHT:
+                x++;
+                moveto(y, x);
+                break;
+            // default:
+            //     x = x;
+           
+        }
+        wrefresh(this->win);
+    }
+    return;
+}
+
+void Window::movePlayer()
+{
+    // int ch;
+
+    // noecho();
+    // ch = wgetch(this->win);
+    // switch ((ch = wgetch(this->win)))
+    // {
+    // case KEY_UP:
+    //     std::cout << std::endl
+    //               << "Up" << std::endl; //key up
+    //     break;
+    // case KEY_DOWN:
+    //     std::cout << std::endl
+    //               << "Down" << std::endl; // key down
+    //     break;
+    // case KEY_LEFT:
+    //     std::cout << std::endl
+    //               << "Left" << std::endl; // key left
+    //     break;
+    // case KEY_RIGHT:
+    //     std::cout << std::endl
+    //               << "Right" << std::endl; // key right
+    //     break;
+    // default:
+    //     std::cout << std::endl
+    //               << "null" << std::endl; // not arrow
+    //     break;
+    // }
+}
+
+void Window::endWindow()
+{
+    delwin(this->win);
+}
+
+Window::~Window()
+{
+}

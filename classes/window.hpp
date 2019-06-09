@@ -12,11 +12,15 @@ class Window
         ~Window();
         Window(const Window &newft);
 
-        WINDOW *makeWin();
-        void useWin();
+        void readInput();
+        void makeBorder();
+        void displayScore();
         void movePlayer();
         void moveto(int x, int y);
         void endWindow();
-        WINDOW *win;
+        int maxy;
+        int maxx;
+        char border;
+        int score;
 };
 #endif

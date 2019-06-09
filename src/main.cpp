@@ -3,10 +3,8 @@
 
 int main() {
     Hero* player = new Hero();
-    Window *win = new Window();
+    Window win;
 
-    win->makeWin();
-    win->useWin();
     //  initscr();
     // raw();
     // int c;

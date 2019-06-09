@@ -2,6 +2,17 @@
 
 Window::Window()
 {
+    initscr();
+    getch();
+    nodelay(stdscr, true);
+    keypad(stdscr, true);
+    noecho();
+    curs_set(0);
+    getmaxyx(stdscr, maxy, maxx);
+    score = 0;
+    makeBorder();
+    displayScore();
+    readInput();
 }
 
 Window::Window(const Window &newft)
@@ -9,37 +20,62 @@ Window::Window(const Window &newft)
     *this = newft;
 }
 
-WINDOW *Window::makeWin()
+void Window::makeBorder()
 {
-    initscr();
-    this->win = newwin(50, 50, 10, 10);
-    curs_set(0);
+    border = '#';
+    for (int i = 0; i < maxx - 1 ; i++)
+    {
+        move(0, i);
+        addch(border);
+    }
+    for (int i = 0; i < maxx - 1 ; i++)
+    {
+        move(maxy-2, i);
+        addch(border);
+    }
+    for (int i = 0; i < maxy - 1 ; i++)
+    {
+        move(i, 0);
+        addch(border);
+    }
+     for (int i = 0; i < maxy - 1 ; i++)
+    {
+        move(i, maxx-2);
+        addch(border);
+    }
     refresh();
-    return (win);
+}
+
+void Window::displayScore()
+{
+    move(maxy - 1, 0);
+    printw("Score: %d", score);
+    refresh();
 }
 
 void Window::moveto(int y, int x)
 {
-    initscr();
-    char a = 'P';
-    wclear(this->win);
-    mvwaddch(this->win, y, x, a);
-    wrefresh(this->win);
+    getch();
+    box(stdscr, 10, 10);
+    char a = 'X';
+    clear();
+    makeBorder();
+    mvaddch(y, x, a);
+    // mvaddch(y + 1, x, a);
+    // mvaddch(y, x + 1, a);
+    // mvaddch(+ 1, x + 1, a);
     // refresh();
 }
 
-void Window::useWin()
+void Window::readInput()
 {
-
-    initscr();
-    wrefresh(this->win);
-    noecho();
-    keypad(this->win, TRUE);
+    getch();
+    refresh();
     int c, y, x;
-    x = 10;
-    y = 10; 
+    x = 0;
+    y = 0; 
     moveto(y, x);
-    while ((c = wgetch(this->win)) != 27)
+    while ((c = getch()) != 27)
     {
         switch (c)
         {
@@ -59,51 +95,23 @@ void Window::useWin()
                 x++;
                 moveto(y, x);
                 break;
-            // default:
-            //     x = x;
+            default:
+                x = x;
            
         }
-        wrefresh(this->win);
+        // refresh();
     }
     return;
 }
 
-void Window::movePlayer()
-{
-    // int ch;
-
-    // noecho();
-    // ch = wgetch(this->win);
-    // switch ((ch = wgetch(this->win)))
-    // {
-    // case KEY_UP:
-    //     std::cout << std::endl
-    //               << "Up" << std::endl; //key up
-    //     break;
-    // case KEY_DOWN:
-    //     std::cout << std::endl
-    //               << "Down" << std::endl; // key down
-    //     break;
-    // case KEY_LEFT:
-    //     std::cout << std::endl
-    //               << "Left" << std::endl; // key left
-    //     break;
-    // case KEY_RIGHT:
-    //     std::cout << std::endl
-    //               << "Right" << std::endl; // key right
-    //     break;
-    // default:
-    //     std::cout << std::endl
-    //               << "null" << std::endl; // not arrow
-    //     break;
-    // }
-}
-
 void Window::endWindow()
 {
-    delwin(this->win);
+    endwin();
 }
 
 Window::~Window()
 {
+    nodelay(stdscr, false);
+    getch();
+    endwin();
 }
