@@ -23,7 +23,7 @@ void Window::moveto(int y, int x)
     initscr();
     char a = 'P';
     wclear(this->win);
-    mvwaddch(this->win, y, x, a | A_BOLD | A_COLOR);
+    mvwaddch(this->win, y, x, a);
     wrefresh(this->win);
     // refresh();
 }
@@ -46,9 +46,11 @@ void Window::useWin()
             case KEY_UP:
                 y--;
                 moveto(y, x);
+                break;
             case KEY_DOWN:
                 y++;
                 moveto(y, x);
+                break;
             case KEY_LEFT:
                 x--;
                 moveto(y, x);
@@ -57,8 +59,8 @@ void Window::useWin()
                 x++;
                 moveto(y, x);
                 break;
-            default:
-                x = x;
+            // default:
+            //     x = x;
            
         }
         wrefresh(this->win);
@@ -68,33 +70,33 @@ void Window::useWin()
 
 void Window::movePlayer()
 {
-    int ch;
+    // int ch;
 
-    noecho();
-    ch = wgetch(this->win);
-    switch ((ch = wgetch(this->win)))
-    {
-    case KEY_UP:
-        std::cout << std::endl
-                  << "Up" << std::endl; //key up
-        break;
-    case KEY_DOWN:
-        std::cout << std::endl
-                  << "Down" << std::endl; // key down
-        break;
-    case KEY_LEFT:
-        std::cout << std::endl
-                  << "Left" << std::endl; // key left
-        break;
-    case KEY_RIGHT:
-        std::cout << std::endl
-                  << "Right" << std::endl; // key right
-        break;
-    default:
-        std::cout << std::endl
-                  << "null" << std::endl; // not arrow
-        break;
-    }
+    // noecho();
+    // ch = wgetch(this->win);
+    // switch ((ch = wgetch(this->win)))
+    // {
+    // case KEY_UP:
+    //     std::cout << std::endl
+    //               << "Up" << std::endl; //key up
+    //     break;
+    // case KEY_DOWN:
+    //     std::cout << std::endl
+    //               << "Down" << std::endl; // key down
+    //     break;
+    // case KEY_LEFT:
+    //     std::cout << std::endl
+    //               << "Left" << std::endl; // key left
+    //     break;
+    // case KEY_RIGHT:
+    //     std::cout << std::endl
+    //               << "Right" << std::endl; // key right
+    //     break;
+    // default:
+    //     std::cout << std::endl
+    //               << "null" << std::endl; // not arrow
+    //     break;
+    // }
 }
 
 void Window::endWindow()
