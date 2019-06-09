@@ -15,6 +15,7 @@ class Window
         WINDOW *makeWin();
         void useWin();
         void movePlayer();
+        void moveto(int x, int y);
         void endWindow();
         WINDOW *win;
 };
