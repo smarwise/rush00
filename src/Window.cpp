@@ -2,7 +2,9 @@
 
 Window::Window()
 {
+    makeBorder();
     initscr();
+    makeBorder();
     getch();
     nodelay(stdscr, true);
     keypad(stdscr, true);
@@ -10,7 +12,6 @@ Window::Window()
     curs_set(0);
     getmaxyx(stdscr, maxy, maxx);
     score = 0;
-    makeBorder();
     displayScore();
     readInput();
 }
@@ -60,20 +61,22 @@ void Window::moveto(int y, int x)
     char a = 'X';
     clear();
     makeBorder();
+    displayScore();
     mvaddch(y, x, a);
     // mvaddch(y + 1, x, a);
     // mvaddch(y, x + 1, a);
-    // mvaddch(+ 1, x + 1, a);
-    // refresh();
+    // mvaddch(y + 1, x + 1, a);
+    refresh();
 }
 
 void Window::readInput()
 {
+    nodelay(stdscr, true);
     getch();
     refresh();
     int c, y, x;
-    x = 0;
-    y = 0; 
+    x = 2;
+    y = 1; 
     moveto(y, x);
     while ((c = getch()) != 27)
     {
@@ -81,32 +84,33 @@ void Window::readInput()
         {
             case KEY_UP:
                 y--;
+                if (y < 1)
+                    y = 1;
                 moveto(y, x);
                 break;
             case KEY_DOWN:
                 y++;
+                if (y > (maxy - 3))
+                    y = (maxy - 3);
                 moveto(y, x);
                 break;
             case KEY_LEFT:
                 x--;
+                if (x < 2)
+                    x = 2;
                 moveto(y, x);
                 break;
             case KEY_RIGHT:
                 x++;
+                if (x > maxx - 3)
+                    x = maxx - 3;
                 moveto(y, x);
                 break;
             default:
                 x = x;
-           
         }
-        // refresh();
     }
     return;
-}
-
-void Window::endWindow()
-{
-    endwin();
 }
 
 Window::~Window()
