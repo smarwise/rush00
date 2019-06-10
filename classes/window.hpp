@@ -3,6 +3,7 @@
 #include <ncurses.h>
 #include <iostream>
 #include <string>
+#include "heroClass.hpp"
 
 class Window
 {
@@ -12,7 +13,7 @@ class Window
         ~Window();
         Window(const Window &newft);
 
-        void readInput();
+        void readInput(Entity &player);
         void makeBorder();
         void displayScore();
         void movePlayer();

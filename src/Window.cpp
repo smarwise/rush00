@@ -2,6 +2,7 @@
 
 Window::Window()
 {
+    std::cout << "Launching...";
     makeBorder();
     initscr();
     makeBorder();
@@ -10,10 +11,11 @@ Window::Window()
     keypad(stdscr, true);
     noecho();
     curs_set(0);
-    getmaxyx(stdscr, maxy, maxx);
+    this->maxy = 25;
+    this->maxx = 40;
+    // getmaxyx(stdscr, maxy, maxx);
     score = 0;
     displayScore();
-    readInput();
 }
 
 Window::Window(const Window &newft)
@@ -54,7 +56,7 @@ void Window::displayScore()
     refresh();
 }
 
-void Window::moveto(int y, int x)
+void Window::moveto(int x, int y)
 {
     getch();
     box(stdscr, 10, 10);
@@ -69,45 +71,45 @@ void Window::moveto(int y, int x)
     refresh();
 }
 
-void Window::readInput()
+void Window::readInput(Entity & player)
 {
     nodelay(stdscr, true);
     getch();
     refresh();
-    int c, y, x;
-    x = 2;
-    y = 1; 
-    moveto(y, x);
+    int c;
+    // x = 2;
+    // y = 1; 
+    moveto(player.position_x , player.position_y);
     while ((c = getch()) != 27)
     {
         switch (c)
         {
-            case KEY_UP:
-                y--;
-                if (y < 1)
-                    y = 1;
-                moveto(y, x);
-                break;
-            case KEY_DOWN:
-                y++;
-                if (y > (maxy - 3))
-                    y = (maxy - 3);
-                moveto(y, x);
-                break;
+            // case KEY_UP:
+            //     y--;
+            //     if (y < 1)
+            //         y = 1;
+            //     moveto(y, player.position_x);
+            //     break;
+            // case KEY_DOWN:
+            //     y++;
+            //     if (y > (maxy - 3))
+            //         y = (maxy - 3);
+            //     moveto(y, player.position_x);
+                // break;
             case KEY_LEFT:
-                x--;
-                if (x < 2)
-                    x = 2;
-                moveto(y, x);
+                player.position_x--;
+                if (player.position_x < 1)
+                    player.position_x = 1;
+                moveto(player.position_x, player.position_y);
                 break;
             case KEY_RIGHT:
-                x++;
-                if (x > maxx - 3)
-                    x = maxx - 3;
-                moveto(y, x);
+                player.position_x++;
+                if (player.position_x > maxx - 3)
+                    player.position_x = maxx - 3;
+                moveto(player.position_x, player.position_y);
                 break;
             default:
-                x = x;
+                player.position_x = player.position_x;
         }
     }
     return;

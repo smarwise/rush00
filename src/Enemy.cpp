@@ -1,20 +1,20 @@
-#include "../classes/heroClass.hpp"
+#include "../classes/enemyClass.hpp"
 
-Hero::Hero() {
+Enemy::Enemy() {
     std::cout << "Player Created!\n";
 }
 
-Hero::Hero(std::string name) : Entity(name) {
+Enemy::Enemy(std::string name) : Entity(name) {
     setLives(3);
-    setX(18);
+    setX(11);
     setY(21);
     std::cout << this->Name << " Created!\n";
 }
 
-Hero::~Hero() {
+Enemy::~Enemy() {
     // std::cout << "Player Destroyed\n";
 }
 
-Hero::Hero(const Hero &newft) {
+Enemy::Enemy(const Enemy &newft) {
     *this = newft;
 }

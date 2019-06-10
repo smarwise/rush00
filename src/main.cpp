@@ -1,9 +1,15 @@
-#include "../classes/ft_retro.hpp"
+#include "../classes/heroClass.hpp"
+#include "../classes/enemyClass.hpp"
 #include "../classes/window.hpp"
 
 int main() {
-    Hero* player = new Hero();
+    Hero* player = new Hero("John");
+    Enemy* enem = new Enemy("Jim");
     Window win;
+
+
+    win.readInput(*player);
+
 
     //  initscr();
     // raw();
