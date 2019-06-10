@@ -6,8 +6,8 @@
 
 class Projectile : public Entity {
     public:
+        Projectile(int x, int y);
         Projectile();
-        Projectile(std::string name);
         ~Projectile();
         Projectile(const Projectile &newft);
 		void operator = (Projectile *obj);

@@ -1,16 +1,13 @@
 #include "../classes/projectileClass.hpp"
 
-Projectile::Projectile() {
+Projectile::Projectile(int x, int y) {
+    setX(x);
+    setY(y);
+    setchr('-');
     std::cout << "Player Created!\n";
 }
 
-Projectile::Projectile(std::string name) : Entity(name) {
-    setLives(3);
-    setX(3);
-    setY(18);
-    setchr('X');
-    this->hot = false;
-    std::cout << this->Name << " Created!\n";
+Projectile::Projectile() {
 }
 
 Projectile::~Projectile() {

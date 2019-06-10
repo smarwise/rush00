@@ -6,8 +6,8 @@ Hero::Hero() {
 
 Hero::Hero(std::string name) : Entity(name) {
     setLives(3);
-    setX(3);
-    setY(18);
+    setX(2);
+    setY(0);
     setchr('X');
     std::cout << this->Name << " Created!\n";
 }

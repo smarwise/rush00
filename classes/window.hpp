@@ -8,20 +8,24 @@
 class Window
 {
     public : 
-        Window();
+        Window(int height, int width, int x_co, int y_co);
         Window(std::string name);
         ~Window();
         Window(const Window &newft);
 
-        void readInput(Entity &player);
-        void projectile(int x, int y, Entity & player);
-        void makeBorder();
-        void displayScore();
+        WINDOW *makeWin();
+        void moveto(Entity & ent);
+        void shot(int x, int y);
+        void enem(int x, int y);
+        void useWin(Entity & ent);
         void movePlayer();
-        void moveto(int x, int y, int a);
-        int maxy;
-        int maxx;
-        char border;
-        int score;
+        void endWindow();
+
+        WINDOW *win;
+
+        int h;
+        int w;
+        int x;
+        int y;
 };
 #endif
