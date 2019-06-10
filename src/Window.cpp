@@ -1,4 +1,5 @@
 #include "../classes/window.hpp"
+#include "../classes/projectileClass.hpp"
 
 Window::Window()
 {
@@ -64,6 +65,7 @@ void Window::moveto(int x, int y, int a)
     makeBorder();
     displayScore();
     mvaddch(y, x, a);
+    
     // mvaddch(y + 1, x, a);
     // mvaddch(y, x + 1, a);
     // mvaddch(y + 1, x + 1, a);
@@ -76,42 +78,57 @@ void Window::readInput(Entity & player)
     getch();
     refresh();
     int c;
+    Projectile *bul = new Projectile();
     // x = 2;
     // y = 1; 
     moveto(player.position_x , player.position_y, player.getchr());
     while ((c = getch()) != 27)
     {
+        napms(40);
         switch (c)
         {
-            // case KEY_UP:
-            //     y--;
-            //     if (y < 1)
-            //         y = 1;
-            //     moveto(y, player.position_x);
-            //     break;
-            // case KEY_DOWN:
-            //     y++;
-            //     if (y > (maxy - 3))
-            //         y = (maxy - 3);
-            //     moveto(y, player.position_x);
-                // break;
-            case KEY_LEFT:
-                player.position_x--;
-                if (player.position_x < 1)
-                    player.position_x = 1;
+            case KEY_UP:
+                player.position_y--;
+                if (player.position_y < 1)
+                    player.position_y = 1;
                 moveto(player.position_x, player.position_y, player.getchr());
                 break;
-            case KEY_RIGHT:
-                player.position_x++;
-                if (player.position_x > maxx - 3)
-                    player.position_x = maxx - 3;
+            case KEY_DOWN:
+                player.position_y++;
+                if (player.position_y > (maxy - 3))
+                    player.position_y = (maxy - 3);
                 moveto(player.position_x, player.position_y, player.getchr());
+                break;
+            // case KEY_LEFT:
+            //     player.position_x--;
+            //     if (player.position_x < 1)
+            //         player.position_x = 1;
+            //     moveto(player.position_x, player.position_y, player.getchr());
+            //     break;
+            // case KEY_RIGHT:
+            //     player.position_x++;
+            //     if (player.position_x > maxx - 3)
+            //         player.position_x = maxx - 3;
+            //     moveto(player.position_x, player.position_y, player.getchr());
+            //     break;
+            case ' ':
+                projectile(player.position_x, player.position_y, player);
                 break;
             default:
                 player.position_x = player.position_x;
         }
     }
     return;
+}
+
+void Window::projectile(int x, int y, Entity & player)
+{
+    while (x != maxx-2)
+    {
+        moveto(x, y, '-');
+        x++;
+        // readInput(player);
+    }
 }
 
 Window::~Window()

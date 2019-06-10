@@ -14,6 +14,7 @@ class Window
         Window(const Window &newft);
 
         void readInput(Entity &player);
+        void projectile(int x, int y, Entity & player);
         void makeBorder();
         void displayScore();
         void movePlayer();

@@ -2,7 +2,7 @@ NAME = ft_retro
 
 FLAGS = clang++ #-Wall -Wextra -Werror -Wuninitialized
 
-OBJ = obj/Hero.o obj/main.o obj/Window.o obj/Entity.o obj/Enemy.o
+OBJ = obj/Hero.o obj/main.o obj/Window.o obj/Entity.o obj/Enemy.o obj/Projectile.o
 
 $(NAME): $(OBJ)
 		$(FLAGS) -lncurses -o $(NAME) $(OBJ)
