@@ -29,6 +29,10 @@ void Entity::setY(int value) {
     this->position_y = value;
 }
 
+void Entity::setchr(int value) {
+    this->chr = value;
+}
+
 int Entity::getLives() {
     return (this->Lives);
 }
@@ -39,4 +43,8 @@ int Entity::getX() {
 
 int Entity::getY() {
     return (this->position_y);
+}
+
+int Entity::getchr() {
+    return (this->chr);
 }

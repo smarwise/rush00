@@ -8,6 +8,7 @@ Enemy::Enemy(std::string name) : Entity(name) {
     setLives(3);
     setX(11);
     setY(21);
+    setchr('E');
     std::cout << this->Name << " Created!\n";
 }
 

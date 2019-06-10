@@ -17,7 +17,7 @@ class Window
         void makeBorder();
         void displayScore();
         void movePlayer();
-        void moveto(int x, int y);
+        void moveto(int x, int y, int a);
         int maxy;
         int maxx;
         char border;

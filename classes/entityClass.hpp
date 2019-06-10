@@ -16,14 +16,17 @@ class Entity {
         int Lives;
         int position_y; /* Dont know if you need these co-ordinates */
         int position_x;
+        int chr;
 
         void setLives(int value);
         void setX(int value);
         void setY(int value);
+        void setchr(int value);
 
         int getLives();
         int getX();
         int getY();
+        int getchr();
 };
 
 #endif

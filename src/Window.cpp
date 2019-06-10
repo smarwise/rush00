@@ -56,11 +56,10 @@ void Window::displayScore()
     refresh();
 }
 
-void Window::moveto(int x, int y)
+void Window::moveto(int x, int y, int a)
 {
     getch();
     box(stdscr, 10, 10);
-    char a = 'X';
     clear();
     makeBorder();
     displayScore();
@@ -79,7 +78,7 @@ void Window::readInput(Entity & player)
     int c;
     // x = 2;
     // y = 1; 
-    moveto(player.position_x , player.position_y);
+    moveto(player.position_x , player.position_y, player.getchr());
     while ((c = getch()) != 27)
     {
         switch (c)
@@ -100,13 +99,13 @@ void Window::readInput(Entity & player)
                 player.position_x--;
                 if (player.position_x < 1)
                     player.position_x = 1;
-                moveto(player.position_x, player.position_y);
+                moveto(player.position_x, player.position_y, player.getchr());
                 break;
             case KEY_RIGHT:
                 player.position_x++;
                 if (player.position_x > maxx - 3)
                     player.position_x = maxx - 3;
-                moveto(player.position_x, player.position_y);
+                moveto(player.position_x, player.position_y, player.getchr());
                 break;
             default:
                 player.position_x = player.position_x;
